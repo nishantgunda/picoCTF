@@ -1,0 +1,39 @@
+i Found the function while going through everything
+void FUN_0010298a(void)
+{
+  ada__calendar__delays__delay_for(1000000000000000);
+  FUN_00102616();
+  FUN_001024aa();
+  FUN_00102372();
+  FUN_001025e2();
+  FUN_00102852();
+  FUN_00102886();
+  FUN_001028ba();
+  FUN_00102922();
+  FUN_001023a6();
+  FUN_00102136();
+  FUN_00102206();
+  FUN_0010230a();
+  FUN_00102206();
+  FUN_0010257a();
+  FUN_001028ee();
+  FUN_0010240e();
+  FUN_001026e6();
+  FUN_00102782();
+  FUN_001028ee();
+  FUN_0010230a();
+  FUN_001022a2();
+  FUN_0010216a();
+  FUN_0010223a();
+  FUN_00102206();
+  FUN_00102102();
+  FUN_0010230a();
+  FUN_00102956();
+  return;
+}
+the first function from the name feels like creates a very large delay.
+so i looked at the function FUN_00102616()
+It refrenced 2 variables DAT_00102cd8,DAT_00102cb8.
+DAT_00102cd8 had "p" in it but i couldn't understand what it meant.
+i then looked up   FUN_001024aa(); which refrenced DAT_00102cd1,DAT_00102cb8
+here DAT_00102cd1 had "i" in it and other variable was a repeat so i continued to do this for other functions to get the answer.
