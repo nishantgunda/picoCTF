@@ -1,0 +1,26 @@
+argument=3736234946
+In main:
+	ldr	x0, [x0]    ;x0="3736234946"
+	bl	atoi        ;x0=3736234946
+	bl	func1       ;go to func1
+In func1:
+	sub	sp, sp, #32
+	str	w0, [sp, 12]     ;sp+12=3736234946
+	str	wzr, [sp, 24]    ;sp+24=0
+	str	wzr, [sp, 28]    ;sp+28=0
+	b	.L2                ;go to L2
+In L2:
+	ldr	w1, [sp, 28]    ;w1=sp+28=0
+	ldr	w0, [sp, 12]    ;w0=sp+12=3736234946
+	cmp	w1, w0          ;w1-w0=-3736234946
+	bcc	.L3             ;It does have a carry so go to L3
+ In L3:
+ 	ldr	w0, [sp, 24]   ;w0=sp+24=0
+	add	w0, w0, 3      ;w0=0+3=3
+	str	w0, [sp, 24]   ;sp+24=3
+	ldr	w0, [sp, 28]   ;w0=sp+28
+	add	w0, w0, 1      ;w0=0+1=1
+	str	w0, [sp, 28]   ;sp+28=1
+Therefore this loop will continue till sp+28 becomes equal to the argument
+So by that time sp+24 will be argument*3
+Later in the main function send x0 which has the value of sp+24 is sent to the function .LC0 which prints it as a result
