@@ -1,15 +1,27 @@
 	add	x0, x0, 8           ;x0 points to 1048110976
+	
 	ldr	x0, [x0]            ;x0="1048110976"
+	
 	bl	atoi                ;x0=1048110976
+	
 	bl	func1               ;go to func
+	
 In func1:
+
 	stp	x29, x30, [sp, -48]!
+	
 	add	x29, sp, 0           ;x29=sp
+	
 	str	w0, [x29, 28]        ;sp+28=1048110976
+	
 	str	wzr, [x29, 44]       ;sp+44=0
+	
 	b	.L2                  ;go to L2
+	
 In L2:
+
 	ldr	w0, [x29, 28]       ;w0=1048110976
+	
 	cmp	w0, 0                
 	bne	.L4                 ;keep going to L4 until w0=0
 In L4:
