@@ -1,0 +1,41 @@
+Main function:
+	ldr	x0, [x0]        ;lets say x0="n"
+	bl	atoi            ;x0=n
+	str	w0, [x29, 44]   ;sp+44=n
+	ldr	w0, [x29, 44]   ;w0=n
+	bl	func            ;go to func
+In func:
+	str	w0, [sp, 12]     ;sp+12=n
+	mov	w0, 87           ;w0=87
+	str	w0, [sp, 16]     ;sp+16=87
+	mov	w0, 3            ;w0=3
+	str	w0, [sp, 20]     ;sp+20=3
+	mov	w0, 3            ;w0=3
+	str	w0, [sp, 24]     ;sp+24=3
+	ldr	w0, [sp, 20]     ;w0=3
+	ldr	w1, [sp, 16]     ;w1=87
+	lsl	w0, w1, w0       ;w0=87<<3=87*8=696
+	str	w0, [sp, 28]     ;sp+28=696
+	ldr	w1, [sp, 28]     ;w1=696
+	ldr	w0, [sp, 24]     ;w0=3
+	sdiv	w0, w1, w0       ;w0=w1/w0=696/3=232
+	str	w0, [sp, 28]     ;sp+28=232
+	ldr	w1, [sp, 28]     ;w1=232
+	ldr	w0, [sp, 12]     ;w0=n
+	sub	w0, w1, w0       ;w0=w1-w0=232-n
+	str	w0, [sp, 28]     ;sp+28=232-n
+	ldr	w0, [sp, 28]     ;w0=232-n
+	add	sp, sp, 32
+	ret
+back in main:
+	cmp	w0, 0
+	bne	.L4              ;executes if w0 not equal to zero
+	adrp	x0, .LC0
+ when i checked .L4:
+ .L4:
+	adrp	x0, .LC1
+	add	x0, x0, :lo12:.LC1
+	bl	puts
+ It was calling .LC1 which had the command to print you lose
+ so i went back to main and there i saw that after the L4 line thwere was a command to call .LC0 whose job was to print You win so i realised that w0 must be 0 
+ Therefore n=232
