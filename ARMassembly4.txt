@@ -1,0 +1,36 @@
+main:
+	ldr	x0, [x0]              ;x0="3251372985"
+	bl	atoi                  ;x0=3251372985    
+	str	w0, [x29, 44]         ;sp+44=3251372985
+	ldr	w0, [x29, 44]         ;w0=3251372985
+	bl	func1                 ;go to func1
+func1:
+	stp	x29, x30, [sp, -32]!
+	add	x29, sp, 0
+	str	w0, [x29, 28]         ;sp+28=3251372985
+	ldr	w0, [x29, 28]         ;w0=3251372985
+	cmp	w0, 100               ;3251372985-100=3251372885
+	bls	.L2                   ;false
+	ldr	w0, [x29, 28]         ;w0=3251372985
+	add	w0, w0, 100           ;w0=w0+100=3251373085
+	bl	func2                 ;go to func2
+func2:
+	str	w0, [x29, 28]         ;sp+28=3251373085
+	ldr	w0, [x29, 28]         ;w0=3251373085
+	cmp	w0, 499               ;3251373085-499=
+	bhi	.L5                   ;true since its higher go to L5
+.L5:
+	ldr	w0, [x29, 28]         ;w0=3251373085
+	add	w0, w0, 13            ;w0=w0+13=3251373098
+	bl	func5                 ;go to func5
+func5:
+	str	w0, [x29, 28]           ;sp+28=3251373098
+	ldr	w0, [x29, 28]           ;w0=3251373098
+	bl	func8                   ;go to func8
+	str	w0, [x29, 28]           ;sp+28=3251373100
+	ldr	w0, [x29, 28]           ;w0=3251373100
+	ldp	x29, x30, [sp], 32
+	ret
+back to func2:
+	ldr	w0, [x29, 28]         ;sp+28=3251373100
+	sub	w0, w0, #86           ;w0=w0-#86
